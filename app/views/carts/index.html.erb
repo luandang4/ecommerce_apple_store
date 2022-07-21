@@ -1,0 +1,53 @@
+<div class="container bg-white rounded-top mt-5 cart-layout" id="zero-pad">
+  <div class="pt-4 text-center">
+    <h3>Shopping Cart</h3>
+  </div>
+  <div class="row d-flex justify-content-center min-height-700">
+    <div class="col-lg-10 col-12 pt-3 cart-items">
+      <div class="d-flex pt-4">
+      <div class="font-weight-normal size-cart">
+        <%= @cart_items&.size || 0 %> items</div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Products</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody class="cart-item-container min-height-500">
+          <%= render partial: "cart_items/cart_item", collection: @cart_items %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="container bg-light rounded-bottom py-4 pay-cart" id="zero-pad">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-10 col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <%= link_to root_path do %>
+            <button class="btn btn-sm bg-light border border-dark">Continue Shopping</button>
+          <% end %>
+        </div>
+        <div class="px-md-0 px-1" id="footer-font">
+          <b class="pl-md-4">
+            Total:
+            <span class="pl-md-4 total-payment" data-cart-id="<%= @current_cart&.id %>"><%= format_number_to_currency @total_payment %> đ</span>
+          </b>
+        </div>
+        <div>
+          <% if @cart_items.present? %>
+            <%= link_to new_order_path do %>
+              <button class="btn btn-sm bg-dark text-white px-lg-5 px-3 checkout-order">Checkout</button>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

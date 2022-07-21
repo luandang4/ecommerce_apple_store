@@ -1,0 +1,13 @@
+default: &default
+  adapter: postgresql
+  timeout: 5000
+
+development:
+  adapter: postgresql
+  timeout: 5000
+  host: 127.0.0.1
+  port: 5432
+  database: ecommerce_apple
+  pool: 5
+  username: root
+  password: password

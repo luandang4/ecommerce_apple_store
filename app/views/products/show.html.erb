@@ -1,0 +1,68 @@
+<div class="super_container">
+  <div class="single_product">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-2 order-lg-1 order-2">
+          <ul class="image_list">
+            <%= render partial: "products/image_list" %>
+          </ul>
+        </div>
+        <div class="col-lg-4 order-lg-2 order-1">
+          <div class="image_selected">
+            <% if @product.image? %>
+              <%= image_tag @product.image.url %>
+            <% else %>
+              <%= image_tag "apple_logo_grey.svg.png" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-lg-6 order-3">
+          <div class="product_description">
+            <nav>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Products</a></li>
+              </ol>
+            </nav>
+            <div class="product_name"><%= @product.name %></div>
+            <div><span class="ml-2 product_price"><%= format_number_to_currency @product.price %>đ</span></div>
+              <div> <span class="product_info">
+                <%= @product.description %>
+              </div>
+              <div class="row">
+                <div class="col-xs-6">
+                  <div class="row">
+                    <div class="col-3 w-25">
+                      <div class="text-quantity">
+                        <p>Quantity</p>
+                      </div>
+                    </div>
+                    <div class="col-3 w-25">
+                      <div class="quantity">
+                        <input value="1" min="1" max=<%= @product.residual %> class="form-control text-center change-quatity product-quatity" type="number" id="quantity">
+                      </div>
+                    </div>
+                    <div class="col-3 w-25">
+                      <div class="available-product">
+                        <p><%= @product.residual %> pieces available</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6">
+                  <button type="button" class="btn btn-primary shop-button btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal" data-product-id="<%= @product.id %>">Add to Cart</button>
+                  <button type="button" class="btn btn-success shop-button">Buy Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row row-underline">
+          <div class="col-md-6"> <span class="ml-2 mt-4 deal-text"></span> </div>
+          <div class="col-md-6"> <a href="#" data-abc="true"> <span class="ml-auto view-all"></span> </a> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render "share/modal" if user_signed_in? %>

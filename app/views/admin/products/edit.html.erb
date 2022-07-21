@@ -1,0 +1,26 @@
+<% provide :title, "Update Product" %>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="white-box">
+      <div class="table-responsive">
+        <%= form_for @product, url: admin_product_path do |f| %>
+          <%= render 'share/error_messages', object:  f.object %>
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %>
+          <div class="picture my-3">
+            <%= f.file_field :image, accept: "image/jpeg, image/gif, image/png, image/jpg" %>
+          </div>
+          <%= f.label :price %>
+          <%= f.text_field :price, class: "form-control" %>
+          <%= f.label :quantity %>
+          <%= f.text_field :residual, class: "form-control" %>
+          <%= f.label :description %>
+          <%= f.text_field :description, class: "form-control" %>
+          <%= f.label :category %>
+          <%= select_tag :category_id, options_from_collection_for_select(@category, "id", "name"), class: "form-select" %>
+          <%= f.button :submit, class: "btn btn-primary mt-3" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

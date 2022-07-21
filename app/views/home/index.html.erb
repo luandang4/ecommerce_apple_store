@@ -1,0 +1,77 @@
+<main>
+  <%= render "carousel" %>
+  <div class="category-area category-product">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-4 ">
+          <div class="category-listing mb-50">
+            <div class="single-listing">
+              <h3>Category</h3>
+              <%= render @categories %>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-8 ">
+          <div class="new-arrival new-arrival2 product-area">
+            <div class="row render-product">
+              <%= render partial: "share/product", collection: @products %>
+              <div class="d-flex justify-content-center">
+                <%= paginate @products, window: 2 %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="categories-area section-padding-top20 gray-bg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="single-cat mb-50">
+            <div class="cat-icon">
+              <%= image_tag("services1") %>
+            </div>
+            <div class="cat-cap">
+              <h5>Fast & Free Delivery</h5>
+              <p>Free delivery on all orders</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="single-cat mb-50">
+            <div class="cat-icon">
+              <%= image_tag("services2") %>
+            </div>
+            <div class="cat-cap">
+              <h5>Fast & Free Delivery</h5>
+              <p>Free delivery on all orders</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="single-cat mb-30">
+            <div class="cat-icon">
+              <%= image_tag("services3") %>
+            </div>
+            <div class="cat-cap">
+              <h5>Fast & Free Delivery</h5>
+              <p>Free delivery on all orders</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="single-cat">
+            <div class="cat-icon">
+              <%= image_tag("services4") %>
+            </div>
+            <div class="cat-cap">
+              <h5>Fast & Free Delivery</h5>
+              <p>Free delivery on all orders</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

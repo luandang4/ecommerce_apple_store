@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class="preloader">
+      <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+      </div>
+    </div>
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+      <%= render "layouts/admin/header" %>
+      <%= render "layouts/admin/sidebar" %>
+      <div class="page-wrapper" style="min-height: 250px;">
+        <div class="page-breadcrumb bg-white">
+          <div class="row align-items-center">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+              <h4 class="page-title"><%= admin_page_title(yield(:title)) %></h4>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid">
+        <% flash.each do |message_type, message| %>
+          <div class="flash-alert text-center alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+          <%= yield %>
+        </div>
+        <%= render "layouts/admin/footer" %>
+      </div>
+    </div>
+  </body>
+</html>

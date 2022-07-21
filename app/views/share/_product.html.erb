@@ -1,0 +1,22 @@
+<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+  <div class="single-new-arrival mb-50 text-center">
+    <div class="popular-img">
+      <% if product.image? %>
+        <%= image_tag product.image.url %>
+      <% else %>
+        <%= image_tag "apple_logo_grey.svg.png" %>
+      <% end %>
+      <input type="hidden" class="product-quatity" value="1">
+      <div class="favorit-items btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal" data-product-id="<%= product.id %>">
+        <%= image_tag("favorit-card") %>
+      </div>
+    </div>
+    <div class="popular-caption">
+      <p><%= link_to product.name, product_path(product), class: "text-decoration-none" %></p>
+      <p><%= format_number_to_currency product.price %>đ</p>
+      <p>Sold: <%= product.sold %></p>
+      <button type="button" class="btn btn-outline-success">Buy now</button>
+    </div>
+  </div>
+</div>
+<%= render "share/modal" if current_user.present? %>

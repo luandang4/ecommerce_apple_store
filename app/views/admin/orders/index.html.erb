@@ -1,0 +1,28 @@
+<% provide :title, "Order" %>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="white-box">
+      <div class="table-responsive">
+        <table class="table text-nowrap">
+          <thead>
+            <tr>
+              <th class="border-top-0">Id</th>
+              <th class="border-top-0">Customer name</th>
+              <th class="border-top-0">Address</th>
+              <th class="border-top-0">Payment method</th>
+              <th class="border-top-0">Shipping fee</th>
+              <th class="border-top-0">Total payment</th>
+              <th class="border-top-0">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render partial: "admin/orders/order", collection: @orders %>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+          <%= paginate @orders, window: 2 %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

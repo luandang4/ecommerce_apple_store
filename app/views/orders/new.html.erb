@@ -1,0 +1,81 @@
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2>Checkout</h2>
+    </div>
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Your cart</span>
+          <span class="badge bg-primary rounded-pill"><%= @order_items.size %></span>
+        </h4>
+        <ul class="list-group mb-3">
+          <%= render partial: "orders/order_items", collection: @order_items %>
+          <hr class="mb-2">
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Shipping fee</span>
+            <span class="text-muted col-xs-12">0 đ</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (VNĐ)</span>
+            <strong><%= format_number_to_currency @total_price %> đ</strong>
+          </li>
+        </ul>
+        <%= form_with url: "/orders", method: :post, local: true, id: "payment-form" do |f| %>
+        <div class="col-md-12 offset-md-12 col-10 offset-1 pl-0 pr-0" id="form-payment">
+        </div>
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Billing address</h4>
+          <%= f.hidden_field :total_payment, value: @total_price %>
+          <%= f.hidden_field :shipping_fee, value: 0 %>
+          <div class="row g-3">
+            <% if current_user.delivery_addresses.present? %>
+            <div class="col-12">
+              <%= f.label :delivery_address, class:"form-label" %>
+              <%= f.select :address, option_for_address, {prompt: "Select devivery address"}, class: "form-select delivery-address" %>
+            </div>
+            <div class="col-12">
+              <label>Name</label>
+              <input class="form-control name-address" readonly>
+            </div>
+            <div class="col-12">
+              <label>Phone</label>
+              <input class="form-control phone-address" readonly>
+            </div>
+            <div class="col-12">
+              <label>Address</label>
+              <input class="form-control current-address" readonly>
+            </div>
+            <% else %>
+                <h5>You do not have a shipping address yet, please create a new one <%= link_to "here!", new_address_path %></h5>
+            <% end %>
+          </div>
+          <hr class="my-4">
+          <h4 class="mb-3">Payment method</h4>
+          <div class="my-3">
+            <%= f.select :payment_method, Order.payment_method.options, {}, class: "form-select payment-method" %>
+          </div>
+          <hr class="my-4">
+          <%= f.button :checkout, type: "submit", class: "w-100 btn btn-primary btn-lg btn-checkout" %>
+        <% end %>
+        <p class="my-4"></p>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Notify</h5>
+      </div>
+      <div class="modal-body">
+        Item has been <span style="color: #dc3545;">Added</span> to your shopping cart
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

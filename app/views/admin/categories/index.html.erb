@@ -1,0 +1,23 @@
+<% provide :title, "Category" %>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="white-box">
+      <%= button_to "New category", new_admin_category_path, method: :get, class: "btn btn-primary mb-3" %>
+      <div class="table-responsive">
+        <table class="table text-nowrap">
+          <thead>
+            <tr>
+              <th class="border-top-0">Id</th>
+              <th class="border-top-0">Name</th>
+              <th class="border-top-0">Action</th>
+              <th class="border-top-0"></th>
+            </tr>
+          </thead>
+          <tbody class="admin-category">
+            <%= render partial: "admin/categories/category", collection: @categories %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

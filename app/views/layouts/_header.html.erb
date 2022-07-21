@@ -1,0 +1,84 @@
+<header>
+  <div class="header-area ">
+    <div class="main-header header-sticky">
+      <div class="container-fluid">
+        <div class="menu-wrapper d-flex align-items-center justify-content-between">
+          <div class="header-left d-flex align-items-center">
+            <span class="logo-text">
+              <%= link_to root_path do %>
+                <%= image_tag("logo-text-2") %>
+              <% end %>
+            </span>
+            <!-- Main-menu -->
+            <div class="main-menu d-none d-lg-block">
+              <nav>
+                <ul id="navigation">
+                  <li><%= link_to "Home", root_path, class: "text-decoration-none" %></li>
+                  <li><a href="#" class="text-decoration-none">Help</a></li>
+                  <li><a href="#" class="text-decoration-none">About</a></li>
+                  <li><a href="#" class="text-decoration-none">Blog</a></li>
+                  <li><a href="#" class="text-decoration-none">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div class="header-right1 d-flex align-items-center">
+            <div class="search d-none d-md-block">
+              <ul class="d-flex align-items-center">
+                <li class="mr-15">
+                  <div class="nav-search search-switch d-flex">
+                    <%= search_form_for @q do |f| %>
+                      <%= f.search_field :name_cont, placeholder: "Search...", class: "form-control mt-0" %>
+                    <% end %>
+                  </div>
+                </li>
+                <li>
+                  <%= link_to carts_path do %>
+                    <div class="card-stor js-total-item">
+                      <%= image_tag("card") %>
+                      <span id="cart-quantity">
+                        <% if @current_cart.present? %>
+                          <%= @current_cart.cart_items.size %>
+                        <% end %>
+                      </span>
+                    </div>
+                  <% end %>
+                </li>
+                <% if user_signed_in? %>
+                  <div>
+                    <%= link_to user_path(current_user), class: "profile-pic" do %>
+                      <% if current_user.avatar? %>
+                        <%= image_tag current_user.avatar.url, class: "img-circle" %>
+                      <% else %>
+                        <%= image_tag("varun.jpg", alt: "user-img", class: "img-circle")%>
+                      <% end %>
+                      <span class="font-medium"><%= current_user.name %></span>
+                    <% end %>
+                  </div>
+                  <div class="dropdown m-2">
+                      <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"></a>
+                      <div class="dropdown-menu">
+                        <% if current_user.admin? %>
+                          <%= link_to "Admin", admin_dashboard_index_path, class: "dropdown-item" %>
+                        <% end %>
+                        <%= link_to "Settings", user_path(current_user), class: "dropdown-item" %>
+                        <hr class="dropdown-divider">
+                        <%= link_to "Logout", destroy_user_session_path, method: :delete , class: "dropdown-item" %>
+                      </div>
+                  </div>
+                <% else %>
+                  <li>
+                    <%= link_to "Login", new_user_session_path, class: "me-2 ms-2" %>
+                  </li>
+                  <li>
+                    <%= link_to "Sign up", new_user_registration_path, class: "me-2" %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

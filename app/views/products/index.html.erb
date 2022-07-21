@@ -1,0 +1,14 @@
+<div class="container min-height-700">
+  <div class="new-arrival new-arrival2 product-area">
+    <% if @products.present? %>
+      <div class="row">
+        <%= render partial: "share/product", collection: @products %>
+        <div class="d-flex justify-content-center">
+          <%= paginate @products, window: 2 %>
+        </div>
+      </div>
+    <% else %>
+      <p> Không có sản phẩm nào phù hợp </p>
+    <% end %>
+  </div>
+</div>

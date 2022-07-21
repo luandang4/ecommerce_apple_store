@@ -1,0 +1,17 @@
+<% provide :title, "Update Category" %>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="white-box">
+      <div class="table-responsive">
+        <%= form_for @category, url: admin_category_path do |f| %>
+          <%= render 'share/error_messages', object:  f.object %>
+          <%= f.label :id %>
+          <%= f.text_field :id, class: "form-control", readonly: true %>
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %>
+          <%= f.button :submit, class: "btn btn-primary mt-3" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

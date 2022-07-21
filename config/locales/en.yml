@@ -1,0 +1,6 @@
+en:
+   enumerize:
+    order:
+      payment_method:
+        cash: "Cash on Delivery"
+        card: "Payment Online"

@@ -1,0 +1,26 @@
+<tr>
+  <td><%= product.id %></td>
+  <td class="product-image">
+    <%= image_tag product.image.url if product.image? %>
+  <td>
+    <%= link_to edit_admin_product_path(product.id), class: "user-name" do %>
+      <%= product.name %>
+    <% end %>
+  </td>
+  <td><%= format_number_to_currency product.price %> đ</td>
+  <td><%= product.residual %></td>
+  <td><%= product.sold %></td>
+  <td><%= product.category.name %></td>
+  <td>
+    <div class="delete-product" data-product-id="<%= product.id %>">
+      <%= image_tag "icons-delete-25"  %>
+    </div>
+  </td>
+  <td>
+    <div class="close update-poduct" data-product-id="<%= product.id %>">
+      <%= link_to edit_admin_product_path(product) do %>
+        <%= image_tag "icons-pen-35" %>
+      <% end %>
+    </div>
+  </td>
+</tr>

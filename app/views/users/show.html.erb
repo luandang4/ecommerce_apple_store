@@ -1,0 +1,83 @@
+<div class="container-fluid">
+  <div class="text-center">
+    <h3>Profile</h3>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-xlg-3 col-md-12">
+      <div class="white-box">
+        <div class="user-bg">
+          <%= image_tag("img1") %>
+          <div class="overlay-box">
+            <div class="user-content">
+              <a href="javascript:void(0)">
+                <% if current_user.avatar? %>
+                  <%= image_tag current_user.avatar.url, class: "thumb-lg img-circle" %>
+                <% else %>
+                  <%= image_tag("varun.jpg", alt: "user-img", class: "thumb-lg img-circle")%>
+                <% end %>
+              </a>
+              <h4 class="text-white mt-2"><%= current_user.name %></h4>
+              <h5 class="text-white mt-2"><%= current_user.email %></h5>
+            </div>
+          </div>
+        </div>
+        <div class="user-btm-box mt-5 d-md-flex">
+          <div class="col-md-4 col-sm-4 text-center">
+            <h1>258</h1>
+          </div>
+          <div class="col-md-4 col-sm-4 text-center">
+            <h1>125</h1>
+          </div>
+          <div class="col-md-4 col-sm-4 text-center">
+            <h1>556</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 col-xlg-9 col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <%= form_for current_user do |f| %>
+            <%= render 'share/error_messages', object:  f.object %>
+            <%= f.label :avatar %>
+            <div class="picture my-3">
+              <%= f.file_field :avatar, accept: "image/jpeg, image/gif, image/png, image/jpg", onchange: "loadFile(event)" %>
+            </div>
+            <% if current_user.avatar? %>
+              <%= image_tag current_user.avatar.url, class: "thumb-lg img-circle d-block mb-2", id: "output" %>
+            <% else %>
+              <%= image_tag("varun.jpg", alt: "user-img", class: "thumb-lg img-circle d-block mb-2")%>
+            <% end %>
+            <%= f.label :name, class: "my-2" %>
+            <%= f.text_field :name, class: "form-control" %>
+            <%= f.label :email, class: "my-2" %>
+            <%= f.text_field :email, class: "form-control" %>
+            <%= f.label :phone, class: "my-2" %>
+            <%= f.text_field :phone, class: "form-control" %>
+            <%= f.label :gender, class: "my-2" %>
+            <div class="col-3 p-0">
+              <%= f.select :gender, User.gender.options, {prompt: current_user.gender}, class: "form-select" %>
+            </div>
+            <%= f.button "Update profile", class: "btn btn-success my-3" %>
+          <% end %>
+        </div>
+      </div>
+      <hr class="dropdown-divider">
+      <div class="white-box">
+        <span><%= link_to "New Adress", new_address_path, class: "btn btn-primary" %></span>
+        <div class="user-btm-box mt-5 user-address">
+          <%= render partial: "users/address", collection: @address %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src)
+    }
+  };
+</script>

@@ -1,0 +1,1 @@
+class RecentlyProduct < ApplicationRecord;end
